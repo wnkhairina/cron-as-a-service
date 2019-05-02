@@ -8,7 +8,7 @@ const nodemailer= require("nodemailer");
 const ping = require('node-http-ping')
 
 var mongoose   = require('mongoose');
-const uri = "mongodb+srv://user:user@cluster0-vbtuu.mongodb.net/job?retryWrites=true"
+const uri = process.env.MONGODB_CONNECTION
 
 // Create agenda service
 var Agenda = require('agenda')
@@ -91,7 +91,7 @@ router.route('/job')
                 requireTLS: true,
             auth: {
                 user: "wnkhairina@gmail.com",
-                pass: "hagemaru123"
+                pass: "123"
             }
             });
 
