@@ -1,0 +1,1 @@
+const text1 = "this is for demo purposes"
