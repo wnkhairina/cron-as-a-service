@@ -1,13 +1,14 @@
-var express    = require('express');        // call express
-var app        = express();                 // define our app using express
-var bodyParser = require('body-parser');
-var Job = require('./models/job');
-require ('dotenv').config();
-
+const express    = require('express');        // call express
+const bodyParser = require('body-parser');
 const nodemailer= require("nodemailer");
 const ping = require('node-http-ping')
+const mongoose   = require('mongoose');
+require('dotenv').config();
 
-var mongoose   = require('mongoose');
+const Job = require('./schema/job');
+const sendEmail = require('./sendEmail')
+var app = express();                 // define our app using express
+
 const uri = process.env.MONGODB_CONNECTION
 
 // Create agenda service
@@ -24,7 +25,10 @@ agenda.define('Ping website', (job, done) => {
     // Using http by default
     ping(to, 80 /* optional */)
         .then(time => console.log(`Response time: ${time}ms`))
-        .catch(() => console.log(`Failed to ping ${to}`))
+        .catch(() => {
+            console.log(`Failed to ping ${to}`),
+            sendEmail()
+        })
 
     done();
 }); 
@@ -38,7 +42,7 @@ mongoose.connect(uri, { useNewUrlParser: true}, err => {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var port = process.env.PORT || 8081;
+var port = process.env.PORT || 8082;
 
 var router = express.Router(); 
 
@@ -81,37 +85,9 @@ router.route('/job')
         ).then((job) => {
             console.log('Agenda Job Created')
         }).catch((err) => {
-            console.log(err);
+            console.log(err),
+            sendEmail()
             
-            //create email transporter
-            let transporter = nodemailer.createTransport({
-            host: 'smtp.gmail.com',
-            port: 587,
-                secure: false,
-                requireTLS: true,
-            auth: {
-                user: "wnkhairina@gmail.com",
-                pass: "123"
-            }
-            });
-
-                let mailOptions = {
-                from: "wnkhairina@gmail.com",
-                to: "wan.nor.wan.rohaimi@accenture.com",
-                subject: 'Error notice',
-                text: 'Hi, this email is sent to notify that your job is failed.'
-
-                };
-
-                transporter.sendMail(mailOptions, function(err, info){
-                
-                if (err){
-                    return console.log(err.message);
-                } 
-                else {
-                    console.log("Email succesfully sent!");
-                }
-                })     
         })
     });
 

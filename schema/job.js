@@ -7,4 +7,4 @@ var JobSchema = new Schema({
     email: String
 });
 
-module.exports = mongoose.model ('Job', JobSchema);
+module.exports = mongoose.model('Job', JobSchema);
