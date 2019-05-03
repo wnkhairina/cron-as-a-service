@@ -23,7 +23,7 @@ agenda.define('Ping website', (job, done) => {
     console.log(`Ping: ${to}`)
     
     // Using http by default
-    ping(to, 80 /* optional */)
+    ping(to, 80 )
         .then(time => console.log(`Response time: ${time}ms`))
         .catch(() => {
             console.log(`Failed to ping ${to}`),
