@@ -4,6 +4,7 @@ const dotenv = require('dotenv').config() //Read more or ask Kate tomorrow if do
 const ping = require('node-http-ping')
 const sendEmail = require('./sendEmail')
 
+
 const uri = process.env.MONGODB_CONNECTION
 
 const agenda = new Agenda({ db: { address: uri, options: { useNewUrlParser: true } } })
@@ -17,20 +18,19 @@ const createAgenda = async (job) => {
         // const {endpoint} = job.attrs.data;
         console.log(new Date())
         console.log(`Ping: ${to}`)
+        console.log(`Failed to ping at ${agendaJob.attrs.failedAt}`)
 
         ping(to, 80)
             .then(time => console.log(`Response time: ${time}ms`))
             .catch(() => {
                 console.log(`Failed to ping ${to}`)
-                sendEmail()
+                sendEmail(job.email, agendaJob.attrs.failedAt)
             })
-
         done();
     });
 
     await agenda.every(
-        `${job.interval} seconds`,
-        'Ping website',
+        `${job.interval}`, 'Ping website',
         {
             to: job.endpoint,
             from: job.email
@@ -38,8 +38,8 @@ const createAgenda = async (job) => {
     ).then((job) => {
         console.log('Agenda job Created')
     }).catch((err) => {
-        console.log(err),
-            sendEmail()
+        console.log(err);
+        sendEmail(job.email)
     })
 }
 

@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 
 //create email transporter
-const sendEmail = () => {
+const sendEmail = (email, failedAt) => {
     let transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 587,
@@ -13,11 +13,12 @@ const sendEmail = () => {
         }
     });
 
+
     let mailOptions = {
         from: "wnkhairina@gmail.com",
-        to: "wan.nor.wan.rohaimi@accenture.com",
-        subject: 'Not an update',
-        text: 'Hi, this email is sent automatically'
+        to: `${email}`,
+        subject: 'Ping Failure',
+        text: `Hi, this email is sent automatically to notify the ping failure at ${failedAt}`
 
     };
 
@@ -27,10 +28,9 @@ const sendEmail = () => {
             return console.log(err.message);
         }
         else {
-            console.log("Email successfully sent!");
+            console.log(`Email successfully sent to ${email}!`);
         }
     })
-
 }
 
 module.exports = sendEmail
