@@ -17,8 +17,7 @@ const createAgenda = async (job) => {
 
         console.log(new Date())
         console.log(`Ping: ${to}`)
-        console.log(`Failed to ping at ${agendaJob.attrs.failedAt}`)
-
+        
         ping(to, 80)
             .then(time => console.log(`Response time: ${time}ms`))
             .catch(() => {
