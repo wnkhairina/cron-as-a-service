@@ -1,6 +1,7 @@
 const express = require('express');
 var router = express.Router();
 const pingJob = require('./pingJob')
+const readCronJob = require('./readCronJob')
 
 
 //middleware
@@ -12,9 +13,8 @@ const pingJob = require('./pingJob')
 
 
 //get
-router.get('/', function (req, res) {
-    res.json({ message: 'welcome to our api!' });
-});
+router.route('/job')
+    .get(readCronJob);
 
  //create job at http://localhost:8082/api/job
 router.route('/job')

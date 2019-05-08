@@ -3,7 +3,7 @@ const controller = require('./controller')
 
 const router = express.Router()
 
-router.post('/job', controller.createPing)
+router.get('/job',controller.readJob)
 
 
 module.exports = router
