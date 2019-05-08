@@ -3,7 +3,7 @@ const controller = require('./controller')
 
 const router = express.Router()
 
-router.get('/job',controller.readJob)
+router.get('/read-cron-job',controller.readCronJob)
 
 
 module.exports = router
