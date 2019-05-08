@@ -1,24 +1,21 @@
 const express = require('express');
 var router = express.Router();
-const pingJob = require('./pingJob')
+const createCronJob = require('./createCronJob')
 const readCronJob = require('./readCronJob')
-
-
-//middleware
-// router.use(async function (req, res, next) {
-//     console.log('Something is happening.');
-//     createAgenda(req, res)
-//     next();
-// });
-
 
 //get
 router.route('/job')
     .get(readCronJob);
 
- //create job at http://localhost:8082/api/job
+//POST endpoint (Create)
 router.route('/job')
-    .post(pingJob);
+    .post(createCronJob);
+
+//GET endpoint (Read)
+
+//UPDATE endpoint (Update)
+
+//DELETE endpoint (Delete)
 
 // router.use('/job', pingJob)
 module.exports = router
