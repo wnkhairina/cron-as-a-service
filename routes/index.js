@@ -3,15 +3,13 @@ var router = express.Router();
 const createCronJob = require('./createCronJob')
 const readCronJob = require('./readCronJob')
 
-//get
-router.route('/job')
-    .get(readCronJob);
-
 //POST endpoint (Create)
-router.route('/job')
+router.route('/create-cron-job')
     .post(createCronJob);
 
 //GET endpoint (Read)
+router.route('/read-cron-job')
+    .get(readCronJob);
 
 //UPDATE endpoint (Update)
 
