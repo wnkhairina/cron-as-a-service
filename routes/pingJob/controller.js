@@ -2,6 +2,7 @@ const createAgenda = require('./helpers/createAgenda')
 const createJob = require('./helpers/createJob')
 const sendEmail = require('./helpers/sendEmail')
 
+//to rename createPing to createCRONjob
 exports.createPing = async (req, res) => {
     try {
         createJob(req, res, (job => {
