@@ -1,3 +1,4 @@
+//Create a job instance
 const Job = require('../../../schema/job');
 
 const createJob = async(req, res, callback) => {

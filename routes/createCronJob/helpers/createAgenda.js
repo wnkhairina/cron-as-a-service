@@ -1,7 +1,8 @@
 
 const Agenda = require('agenda')
-const dotenv = require('dotenv').config() //Read more or ask Kate tomorrow if don't understand
+const dotenv = require('dotenv').config()
 const ping = require('node-http-ping')
+
 const sendEmail = require('./sendEmail')
 
 const uri = process.env.MONGODB_CONNECTION
@@ -13,12 +14,12 @@ agenda.define('Ping website', (agendaJob, done) => {
     const { to } = agendaJob.attrs.data;
     
     console.log(new Date())
-        
+
     ping(to, 80)
     .then(time => console.log(`Response time: ${time}ms`))
     .catch(() => {
         console.log(`Failed to ping ${to}`)
-        sendEmail(job.email, agendaJob.attrs.failedAt)
+        sendEmail(agendaJob.email, agendaJob.attrs.failedAt)
     })
     done();
 });
@@ -34,8 +35,7 @@ const createAgenda = async (job) => {
     ).then((job) => {
         console.log('Agenda job Created')
     }).catch((err) => {
-        console.log(err);
-        sendEmail(job.email)
+        console.log('Error!', err);
     })
 }
 

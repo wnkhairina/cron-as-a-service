@@ -1,15 +1,21 @@
 const express = require('express');
 var router = express.Router();
-const pingJob = require('./pingJob')
+const createCronJob = require('./createCronJob')
 
 //get
 router.get('/', function (req, res) {
     res.json({ message: 'welcome to our api!' });
 });
 
-//POST endpoint
+//POST endpoint (Create)
 router.route('/job')
-    .post(pingJob);
+    .post(createCronJob);
+
+//GET endpoint (Read)
+
+//UPDATE endpoint (Update)
+
+//DELETE endpoint (Delete)
 
 // router.use('/job', pingJob)
 module.exports = router
