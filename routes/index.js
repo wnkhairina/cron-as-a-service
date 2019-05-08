@@ -1,11 +1,11 @@
 const express = require('express');
 var router = express.Router();
 const createCronJob = require('./createCronJob')
+const readCronJob = require('./readCronJob')
 
 //get
-router.get('/', function (req, res) {
-    res.json({ message: 'welcome to our api!' });
-});
+router.route('/job')
+    .get(readCronJob);
 
 //POST endpoint (Create)
 router.route('/job')

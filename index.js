@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const router = require('./routes')
 const connectMongoDB = require('./db/connectMongoDB')
 
-var port = process.env.PORT || 8083;
+var port = process.env.PORT || 8082;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
