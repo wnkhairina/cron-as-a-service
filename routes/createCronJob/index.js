@@ -3,7 +3,7 @@ const controller = require('./controller')
 
 const router = express.Router()
 
-router.post('/job', controller.createCronJob)
+router.post('/jobs', controller.createCronJob)
 
 
 module.exports = router

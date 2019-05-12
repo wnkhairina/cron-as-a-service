@@ -7,16 +7,21 @@ const sendEmail = require('./sendEmail')
 
 const uri = process.env.MONGODB_CONNECTION
 
-const agenda = new Agenda({ db: { address: uri, options: { useNewUrlParser: true } } })
+const agenda = new Agenda({ db: { address: uri, options: { useNewUrlParser: true }, defaultConcurrency: 5 } })
 
 // Define agenda job
 agenda.define('Ping website', (agendaJob, done) => {
-    const { to } = agendaJob.attrs.data;
+    const { to, id } = agendaJob.attrs.data;
     
-    console.log(new Date())
+    //debug
+    const date = new Date()
+    console.log(date.getSeconds())
 
     ping(to, 80)
-    .then(time => console.log(`Response time: ${time}ms`))
+    .then(time => { 
+        console.log(`Response time: ${time}ms`)
+        console.log(`ObjectID: ${id}`)
+    })
     .catch(() => {
         console.log(`Failed to ping ${to}`)
         sendEmail(agendaJob.email, agendaJob.attrs.failedAt)
@@ -27,8 +32,10 @@ agenda.define('Ping website', (agendaJob, done) => {
 const createAgenda = async (job) => {
     await agenda.start()
     await agenda.every(
-        `${job.interval}`, 'Ping website',
+        `${job.interval}`, 
+        'Ping website',
         {
+            id: job._id,
             to: job.endpoint,
             from: job.email
         }

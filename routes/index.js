@@ -4,11 +4,11 @@ const createCronJob = require('./createCronJob')
 const readCronJob = require('./readCronJob')
 
 //POST endpoint (Create)
-router.route('/create-cron-job')
+router.route('/jobs')
     .post(createCronJob);
 
 //GET endpoint (Read)
-router.route('/read-cron-job')
+router.route('/jobs')
     .get(readCronJob);
 
 //UPDATE endpoint (Update)
