@@ -7,6 +7,8 @@ const sendEmail = require('./sendEmail')
 
 const uri = process.env.MONGODB_CONNECTION
 
+const agenda = new Agenda({ db: { address: uri, options: { useNewUrlParser: true } } })
+
 // Define agenda job
 agenda.define('Ping website', (agendaJob, done) => {
     const { to } = agendaJob.attrs.data;
@@ -22,7 +24,8 @@ agenda.define('Ping website', (agendaJob, done) => {
     done();
 });
 
-const createAgenda = async (job, agenda) => {
+const createAgenda = async (job) => {
+    await agenda.start()
     await agenda.every(
         `${job.interval}`, 'Ping website',
         {
