@@ -1,6 +1,6 @@
-const createAgenda = require('./helpers/createAgenda')
-const createJob = require('./helpers/create-job')
-const findAllJob = require('./helpers/find-all-jobs')
+const { createAgenda } = require('./helpers/create-agenda')
+const { createJob } = require('./helpers/create-job')
+const { findAllJobs } = require('./helpers/find-all-jobs')
 
 exports.createCronJob = async (req, res) => {
   try {
@@ -17,7 +17,7 @@ exports.createCronJob = async (req, res) => {
 
 exports.getAllCronJob = async (req, res) => {
   try {
-    const result = await findAllJob()
+    const result = await findAllJobs()
     res.send({ message: 'OK', result }) // response helper?
   } catch (err) {
     const { message, stack } = err

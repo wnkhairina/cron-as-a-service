@@ -9,7 +9,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/server.js"
+            "program": "${workspaceFolder}/index.js"
         },
         {
             "type": "node",
@@ -17,7 +17,7 @@
             "name": "Launch via NPM",
             "runtimeExecutable": "npm",
             "runtimeArgs": [
-                "start"
+                "run dev"
             ],
             "port": 9229
         }

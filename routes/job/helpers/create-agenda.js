@@ -3,8 +3,7 @@ const ping = require('node-http-ping')
 
 const sendEmail = require('./sendEmail')
 
-const uri = process.env.MONGODB_CONNECTION
-
+const uri = process.env.MONGODB_CONNECTION_STRING
 const agenda = new Agenda({ db: { address: uri, options: { useNewUrlParser: true } } })
 
 // Define agenda job
