@@ -1,7 +1,7 @@
 //Create a job instance
 const Job = require('../../../schema/job');
 
-const createJob = async(req, res, callback) => {
+const createJob = async(req, res) => {
     var job = new Job(); //create an instance of job object
     job.interval = req.body.interval;
     job.endpoint = req.body.endpoint;
@@ -15,7 +15,9 @@ const createJob = async(req, res, callback) => {
         res.json({ message: 'Job created!' });
     });
 
-    callback(job)
+    return job
 }
 
 module.exports = createJob
+
+//Not needed

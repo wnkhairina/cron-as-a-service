@@ -4,9 +4,8 @@ const sendEmail = require('./helpers/sendEmail')
 
 exports.createCronJob = async (req, res) => {
     try {
-        createJob(req, res, (job => {
-            createAgenda(job)
-        }))
+        const job = await createJob(req, res)
+        await createAgenda(job)
     } catch{
         const { message, stack } = error;
         res.status(500).send({ message, stack })
