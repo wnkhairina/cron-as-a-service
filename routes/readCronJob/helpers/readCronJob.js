@@ -1,4 +1,4 @@
-const Job = require('../../../schema/job');
+const Job = require('../../../db/schema/job');
 
 const readCronJob = (req, res, job) => {
     Job.find()

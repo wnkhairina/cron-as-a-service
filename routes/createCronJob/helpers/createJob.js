@@ -1,5 +1,5 @@
 //Create a job instance
-const Job = require('../../../schema/job');
+const Job = require('../../../db/schema/job');
 
 const createJob = async(req, res) => {
     var job = new Job(); //create an instance of job object
