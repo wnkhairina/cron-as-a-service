@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+var mongoose = require('mongoose')
+var Schema = mongoose.Schema
 
-const JobSchema = new Schema({
+var JobSchema = new Schema({
   interval: String,
   endpoint: String,
   email: String
