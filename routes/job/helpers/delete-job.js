@@ -1,11 +1,12 @@
-const Job = require('../../../schema/job');
+const Job = require('../../../db/schema/job');
 
-const deleteJob = async (job) => {
+const deleteJob = async () => {
   try {
-    await job.remove();
+    const removed = await Job.remove();
+    console.log(removed)
     console.log('Successfully removed job from collection');
   } catch (e) {
-    console.error('Error removing job from collection');
+    console.error(e);
   }
 }
 
