@@ -17,7 +17,7 @@ const sendEmail = (email, failedAt) => {
     from: 'wnkhairina@gmail.com',
     to: `${email}`,
     subject: 'Ping Failure',
-    text: `Hi, this email is sent automatically to notify the ping failure at ${failedAt}`
+    text: `Hi, this email is sent automatically to notify the ping failure.`
 
   }
 

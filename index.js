@@ -24,8 +24,10 @@ app.use('*', (req, res, next) => {
 app.listen(port)
 console.log('Server is running on port ' + port)
 
+
 // routes
 app.use('/api', router)
 app.use('*', (req, res) => {
   res.send({ message: 'Hello World!' })
 })
+

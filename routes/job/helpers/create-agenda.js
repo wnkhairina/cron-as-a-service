@@ -37,9 +37,26 @@ const createAgenda = async (job) => {
   //     console.log('Agenda job Created')
   //   }).catch((err) => {
   //     console.log('Error!', err)
-    // })
-    // await agenda.processEvery('6 seconds')
+  //   })
+
+  await agenda.create('Ping website',
+    {
+      to: job.endpoint,
+      from: job.email
+    }
+  )
+  .repeatEvery(`${job.interval}`)
+  .save()
+  .then((job) => {
+    console.log('Agenda job created!')
+    // console.log(job.attrs._id)
+    // console.log('3rd job: ', new Date().getSeconds())
+  })
+
+  // job.repeatEvery("10 seconds");
+  // job.save(); 
 }
+
 
 async function graceful() {
   await agenda.stop();
