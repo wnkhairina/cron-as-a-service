@@ -1,5 +1,5 @@
 const  createAgenda  = require('./helpers/create-agenda')
-const  createJob  = require('./helpers/create-job')
+// const  createJob  = require('./helpers/create-job')
 const { findAllJobs } = require('./helpers/find-all-jobs')
 const deleteCronJob = require('./helpers/delete-all-jobs')
 
@@ -28,6 +28,8 @@ exports.getAllCronJob = async (req, res) => {
 
 exports.getCronJob = async (req, res) => {
   try {
+    // const jobID = req.params.id
+    // await findAllJobs(jobID)
     res.send({ message: 'NOT IMPLEMENTED' })
   } catch (err) {
     const { message, stack } = err

@@ -1,17 +1,13 @@
-const Job = require('../../../db/schema/job')
+const agenda = require('../../../service/agenda')
 
 exports.findAllJobs = async () => {
   return new Promise((resolve, reject) => {
     try {
-      Job.find()
-        .then(jobs => {
-          console.log('Job retrieved')
-          resolve(jobs)
-        }).catch(err => {
-          throw err
-        })
+      const jobs = agenda.jobs({})
+      resolve(jobs)
     } catch (error) {
       reject(error)
     }
   })
 }
+
