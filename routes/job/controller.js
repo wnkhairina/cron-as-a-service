@@ -1,15 +1,13 @@
 const  createAgenda  = require('./helpers/create-agenda')
 const  createJob  = require('./helpers/create-job')
 const { findAllJobs } = require('./helpers/find-all-jobs')
-const deleteCronJob = require('./helpers/delete-job')
+const deleteCronJob = require('./helpers/delete-all-jobs')
 
 
 exports.createCronJob = async (req, res) => {
   try {
     const { interval, endpoint, email } = req.body
-    const job = await createJob(interval, endpoint, email)
-    console.log('Job: ', job)
-    const result = await createAgenda(job)
+    const result = await createAgenda(interval, endpoint, email)
 
     res.send({ message: 'OK', result }) // response helper?
   } catch (err) {
