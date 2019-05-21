@@ -2,7 +2,6 @@ const createAgenda = require('./helpers/create-agenda')
 const { findJob } = require('./helpers/find-job')
 const { findAllJobs } = require('./helpers/find-all-jobs')
 const { updateJobById } = require('./helpers/update-job')
-const deleteCronJob = require('./helpers/delete-all-jobs')
 const { deleteJobById } = require('./helpers/delete-job')
 
 // Create
@@ -63,17 +62,6 @@ exports.updateCronJobByID = async (req, res) => {
     }
 
     await updateJobById(jobID, interval, endpoint, email)
-    res.send({ message: 'OK' })
-  } catch (err) {
-    const { message, stack } = err
-    res.status(500).send({ message, stack })
-  }
-}
-
-// Delete
-exports.deleteCronJob = async (req, res) => {
-  try {
-    await deleteCronJob()
     res.send({ message: 'OK' })
   } catch (err) {
     const { message, stack } = err
