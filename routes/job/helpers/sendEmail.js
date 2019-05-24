@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer')
+require('dotenv').config()
 
 // create email transporter
 const sendEmail = (email, failedAt) => {
@@ -14,7 +15,7 @@ const sendEmail = (email, failedAt) => {
   })
 
   let mailOptions = {
-    from: 'wnkhairina@gmail.com',
+    from: 'wannorkhairina@gmail.com',
     to: `${email}`,
     subject: 'Ping Failure',
     text: `Hi, this email is sent automatically to notify the ping failure.`

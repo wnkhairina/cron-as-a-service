@@ -39,7 +39,8 @@ exports.getCronJob = async (req, res) => {
 
 exports.deleteCronJob = async (req, res) => {
   try {
-    await deleteCronJob()
+    const jobId = req.params.id
+    await deleteCronJob(jobId)
     res.send({ message: 'OK' })
   } catch (err) {
     const { message, stack } = err

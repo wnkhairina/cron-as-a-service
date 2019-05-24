@@ -1,23 +1,5 @@
-// const Agenda = require('agenda')
-
 const uri = process.env.MONGODB_CONNECTION_STRING
-// const agenda = new Agenda({
-//   db: {
-//     address: uri,
-//     options: {
-//       useNewUrlParser: true
-//     }
-//   }
-// },
-// (err) => {
-//   //handle the error
-// })
 
-// // IIFE
-// exports = (async () => {
-//   await agenda.start()
-//   return agenda
-// })()
 const Agenda = require('agenda');
 
 const connectionOpts = {db: {address: uri , options: {useNewUrlParser: true}}};

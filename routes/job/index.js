@@ -5,7 +5,7 @@ const router = express.Router()
 router.post('/', controller.createCronJob)
 router.get('/', controller.getAllCronJob)
 router.get('/:id', controller.getCronJob) // IMPLEMENT
-router.delete('/', controller.deleteCronJob) // NOT IMPLEMENTED
+router.delete('/:id', controller.deleteCronJob) // NOT IMPLEMENTED
 
 
 module.exports = router

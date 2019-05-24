@@ -1,23 +1,19 @@
-const Job = require('../../../db/schema/job');
-const ObjectId = require('agenda/node_modules/mongodb').ObjectId;
+const agenda = require('../../../service/agenda')
+const ObjectID = require('mongodb').ObjectID;
 
-const deleteJob = async () => {
+const deleteJob = async (jobId, req, res) => {
 
-    const { ObjectId } = req.params;
+    console.log('job id ', jobId)
 
-    Job.findByIdAn(ObjectId)
+    return new Promise((resolve, reject) => {
+        try {
+            const jobs = agenda.cancel({_id:ObjectID(jobId)})
+            resolve(jobs)
+        } catch (error) {
+            reject(error)
+        }
+    })
 
-
-
-    // try {
-    //     const removed = await Job.remove();
-    //     console.log(removed)
-    //     console.log('Successfully removed job from collection');
-    // } catch (e) {
-    //     console.error(e);
-    // }
-
-    
 }
 
 module.exports = deleteJob
