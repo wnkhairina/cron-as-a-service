@@ -18,26 +18,13 @@ const createAgenda = async (interval, endpoint, email) => {
     }).catch((err) => {
       console.log('Error!', err)
     })
-
-  // await agenda.every(
-  //   `${interval}`, 'Ping website',
-  //   {
-  //     to: endpoint,
-  //     from: email
-  //   }
-  // ).then(() => {
-  //     console.log('Agenda job Created')
-  //   }).catch((err) => {
-  //     console.log('Error!', err)
-  //   })
 }
+// async function graceful() {
+//   await agenda.stop()
+//   process.exit(0)
+// }
 
-async function graceful() {
-  await agenda.stop();
-  process.exit(0);
-}
-
-process.on('SIGTERM', graceful);
-process.on('SIGINT', graceful);
+// process.on('SIGTERM', graceful);
+// process.on('SIGINT', graceful);
 
 module.exports = createAgenda

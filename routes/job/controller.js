@@ -39,9 +39,10 @@ exports.getCronJob = async (req, res) => {
   }
 }
 
-// 1. wrong properties of req.body [validation done]
+// Possible scenario when update:
+// 1. validation of req.body [v]
 // 2. missing properties [deny updates or replace old data only]
-// 3. no job is found
+// 3. no job is found [v]
 
 exports.updateCronJobByID = async (req, res) => {
   const jobID = req.params.id
