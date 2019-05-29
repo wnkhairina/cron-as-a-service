@@ -8,7 +8,7 @@ const { deleteJobById } = require('./helpers/delete-job')
 // Create
 exports.createCronJob = async (req, res) => {
   try {
-    await validateCreateJobBody(req)
+    await validateCreateJobBody(req) // validates the requests, by checking its body
     const { interval, endpoint, email } = req.body
     const result = await createAgenda(interval, endpoint, email)
 
