@@ -10,4 +10,3 @@ exports.findAllJobs = async () => {
     }
   })
 }
-
