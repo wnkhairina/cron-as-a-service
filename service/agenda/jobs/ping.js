@@ -1,5 +1,6 @@
 const ping = require('node-http-ping')
-const sendEmail = require('../../../routes/job/helpers/sendEmail')
+const webHooks = require('../../webhook')
+const sendEmail = require('./sendEmail')
 
 module.exports = async (agenda) => {
   agenda.define('Ping website', (job, done) => {
@@ -16,6 +17,7 @@ module.exports = async (agenda) => {
       .catch(() => {
         console.log(`FAILED TO PING ${to}`)
         sendEmail(job.attrs.data.from, job.attrs.failedAt)
+        webHooks.trigger('notifyFailure', { data: 'Request from webhook' })
       })
     done()
   })

@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer')
+require('dotenv').config()
 
 // create email transporter
 const sendEmail = (email, failedAt) => {
@@ -9,15 +10,19 @@ const sendEmail = (email, failedAt) => {
     requireTLS: true,
     auth: {
       user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
+      pass: process.env.EMAIL_PASSWORD
     }
   })
 
   let mailOptions = {
-    from: 'wnkhairina@gmail.com',
+<<<<<<< HEAD:routes/job/helpers/sendEmail.js
+    from: 'wannorkhairina@gmail.com',
+=======
+    from: 'cminlee9@gmail.com',
+>>>>>>> kate-dev:service/agenda/jobs/sendEmail.js
     to: `${email}`,
     subject: 'Ping Failure',
-    text: `Hi, this email is sent automatically to notify the ping failure at ${failedAt}`
+    text: `Hi, this email is sent automatically to notify the ping failure.`
 
   }
 

@@ -15,5 +15,3 @@ const deleteJob = async (jobId, req, res) => {
     })
 
 }
-
-module.exports = deleteJob
