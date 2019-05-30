@@ -6,15 +6,15 @@ const ObjectId = mongoose.Types.ObjectId
 // 2. missing properties
 // 3. no job is found
 
-exports.updateJobById = async (id, interval, endpoint, email) => {
+exports.updateJobById = async (jobID, interval, endpoint, email) => {
   try {
     agenda.create('Ping website',
       {
         to: endpoint,
         from: email
       })
-      .repeatEvery(interval)
-      .unique({ '_id': ObjectId(id) })
+      .repeatEvery(`${interval} seconds`)
+      .unique({ '_id': ObjectId(jobID) })
       .save()
     console.log('Updated')
   } catch (error) {

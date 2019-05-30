@@ -1,4 +1,4 @@
-const createAgenda = require('./helpers/create-agenda')
+const { createAgenda } = require('./helpers/create-agenda')
 const validateCreateJobBody = require('./validators/create-job')
 const { findAllJobs } = require('./helpers/find-all-jobs')
 const { findJob } = require('./helpers/find-job')
@@ -74,8 +74,10 @@ exports.updateCronJobByID = async (req, res) => {
 
 exports.deleteCronJobByID = async (req, res) => {
   try {
-    const message = await deleteJobById(req.params.id)
+    const jobId = req.params.id
+    const message = await deleteJobById(jobId)
     res.send({ message })
+    console.log(jobId, 'is deleted succesfully!')
   } catch (err) {
     const { message, stack } = err
     res.status(500).send({ message, stack })

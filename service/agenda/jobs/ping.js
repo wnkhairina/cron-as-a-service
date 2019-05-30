@@ -3,7 +3,7 @@ const webHooks = require('../../webhook')
 const sendEmail = require('./sendEmail')
 
 module.exports = async (agenda) => {
-  agenda.define('Ping website', (job, done) => {
+  agenda.define('Ping website', {lockLifetime: 1000}, (job, done) => {
     const { to } = job.attrs.data
 
     console.log('----------------')
@@ -16,7 +16,7 @@ module.exports = async (agenda) => {
       .then(time => console.log(`Response time: ${time}ms`))
       .catch(() => {
         console.log(`FAILED TO PING ${to}`)
-        sendEmail(job.attrs.data.from, job.attrs.failedAt)
+        // sendEmail(job.attrs.data.from, job.attrs.failedAt)
         webHooks.trigger('notifyFailure', { data: 'Request from webhook' })
       })
     done()

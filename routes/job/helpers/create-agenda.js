@@ -1,30 +1,15 @@
 const agenda = require('../../../service/agenda')
 
-const createAgenda = async (job) => {
-
-  await agenda.create('Ping website',
-    {
-      to: job.endpoint,
-      from: job.email
-    }
-  )
-    .repeatEvery(`${job.interval}`)
-    .save()
-    .then((job) => {
-      console.log('Agenda job created!')
-    }).catch((err) => {
-      console.log('Error!', err)
-    })
-}
+exports.createAgenda = async (interval, endpoint, email) => {
 
   await agenda.create('Ping website',
     {
       to: endpoint,
       from: email
     })
-    .repeatEvery(`${interval}`)
+    .repeatEvery(`${interval} seconds`)
     .save()
-    .then((job) => {
+    .then(() => {
       console.log('Agenda job created!')
     }).catch((err) => {
       console.log('Error!', err)
@@ -38,4 +23,3 @@ const createAgenda = async (job) => {
 // process.on('SIGTERM', graceful);
 // process.on('SIGINT', graceful);
 
-module.exports = createAgenda
