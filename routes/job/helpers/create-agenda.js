@@ -1,11 +1,14 @@
 const agenda = require('../../../service/agenda')
 
-exports.createAgenda = async (interval, endpoint, email) => {
+exports.createAgenda = async (interval, endpoint, email, method, header, body) => {
 
   await agenda.create('Ping website',
     {
       to: endpoint,
-      from: email
+      from: email,
+      method: method,
+      header: header,
+      body: body
     })
     .repeatEvery(`${interval} seconds`)
     .save()
@@ -15,11 +18,3 @@ exports.createAgenda = async (interval, endpoint, email) => {
       console.log('Error!', err)
     })
 }
-// async function graceful() {
-//   await agenda.stop()
-//   process.exit(0)
-// }
-
-// process.on('SIGTERM', graceful);
-// process.on('SIGINT', graceful);
-

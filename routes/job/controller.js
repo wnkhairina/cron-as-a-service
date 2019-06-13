@@ -9,8 +9,8 @@ const { deleteJobById } = require('./helpers/delete-job')
 exports.createCronJob = async (req, res) => {
   try {
     await validateCreateJobBody(req) // validates the requests, by checking its body
-    const { interval, endpoint, email } = req.body
-    const result = await createAgenda(interval, endpoint, email)
+    const { interval, endpoint, email, method, header, body } = req.body
+    const result = await createAgenda(interval, endpoint, email, method, header, body)
 
     res.send({ message: 'OK', result }) // response helper?
   } catch (err) {
@@ -48,11 +48,11 @@ exports.getCronJob = async (req, res) => {
 
 exports.updateCronJobByID = async (req, res) => {
   const jobID = req.params.id
-  const { interval, endpoint, email } = req.body
+  const { interval, endpoint, email, method, header, body } = req.body
   const result = await findJob(jobID)
 
   const updates = Object.keys(req.body)
-  const allowedUpdates = ['interval', 'endpoint', 'email']
+  const allowedUpdates = ['interval', 'endpoint', 'email', 'method', 'header','body']
   const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
   if (!isValidOperation) {
@@ -64,7 +64,7 @@ exports.updateCronJobByID = async (req, res) => {
       return res.status(404).send({ error: 'cron job not found!' })
     }
 
-    await updateJobById(jobID, interval, endpoint, email)
+    await updateJobById(jobID, interval, endpoint, email, method, header, body)
     res.send({ message: 'OK' })
   } catch (err) {
     const { message, stack } = err
