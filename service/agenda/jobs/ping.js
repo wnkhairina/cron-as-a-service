@@ -18,13 +18,12 @@ module.exports = async (agenda) => {
         body: job.attrs.data.body
       },
       headers: [
-        {
-          header: job.attrs.data.header
-        }
-      ]
+        job.attrs.data.header
+      ],
+      json:true
     };
   
-    rp(options.uri, function (error, response) {
+    rp(options, function (error, response) {
     
       console.log('----------------')
       console.log('PING!')
